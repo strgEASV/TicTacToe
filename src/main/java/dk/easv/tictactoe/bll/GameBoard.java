@@ -1,13 +1,16 @@
 
 package dk.easv.tictactoe.bll;
 
+import dk.easv.tictactoe.gui.controller.TicTacViewController;
+
 /**
  *
  * @author EASV
  */
 public class GameBoard implements IGameBoard
 {
-
+    public int player = 0;
+    private final int[][] board = new int[3][3];
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
@@ -15,13 +18,18 @@ public class GameBoard implements IGameBoard
      */
     public int getNextPlayer()
     {
-        //TODO Implement this method
-        return 0;
+        if (player == 1) {
+            player = 0;
+        }
+        else if (player == 0) {
+            player = 1;
+        }
+        return player;
     }
 
     /**
-     * Attempts to let the current player play at the given coordinates. It the
-     * attempt is succesfull the current player has ended his turn and it is the
+     * Attempts to let the current player play at the given coordinates. If the
+     * attempt is succesful the current player has ended his turn and it is the
      * next players turn.
      *
      * @param col column to place a marker in.
@@ -31,8 +39,12 @@ public class GameBoard implements IGameBoard
      */
     public boolean play(int col, int row)
     {
-        //TODO Implement this method
-        return true;
+        if (board[row][col] == 0) {
+            board[row][col] = player + 1;
+            getNextPlayer();
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -41,9 +53,25 @@ public class GameBoard implements IGameBoard
      *
      * @return true if the game is over, else it will retun false.
      */
-    public boolean isGameOver()
-    {
-        //TODO Implement this method
+    public boolean isGameOver() {
+        int checkWin = -1;
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == 1 && board[i][1] == 1 && board[i][2] == 1) {
+                return true;
+            }
+            if (board[i][0] == 2 && board[i][1] == 2 && board[i][2] == 2) {
+                return true;
+            }
+
+        }
+        for (int j = 0; j < 3; j++) {
+            if (board[0][j] == 1 && board[1][j] == 1 && board[2][j] == 1) {
+                return true;
+            }
+            if (board[0][j] == 2 && board[1][j] == 2 && board[2][j] == 2) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -63,6 +91,11 @@ public class GameBoard implements IGameBoard
      */
     public void newGame()
     {
-        //TODO Implement this method
+        player = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = 0;
+            }
+        }
     }
 }

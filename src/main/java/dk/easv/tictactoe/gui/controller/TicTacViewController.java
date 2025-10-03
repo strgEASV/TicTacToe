@@ -30,7 +30,7 @@ public class TicTacViewController implements Initializable
 
     @FXML
     private GridPane gridPane;
-    
+
     private static final String TXT_PLAYER = "Player: ";
     private IGameBoard game;
 
@@ -120,10 +120,10 @@ public class TicTacViewController implements Initializable
         switch (winner)
         {
             case -1:
-                message = "It's a draw :-(";
+                message = "Bro y'all suck lol XD!";
                 break;
             default:
-                message = "Player " + winner + " wins!!!";
+                message = "Yo yo yo, " + winner + " won!!! Nerd...";
                 break;
         }
         lblPlayer.setText(message);
