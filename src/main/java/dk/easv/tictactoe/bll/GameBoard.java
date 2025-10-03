@@ -39,7 +39,10 @@ public class GameBoard implements IGameBoard
      */
     public boolean play(int col, int row)
     {
-        String message = "";
+        if (isGameOver()) {
+            return false; // hra už skončila, tah neplatný
+        }
+
         if (board[row][col] == 0) {
             board[row][col] = player + 1;
             getNextPlayer();
@@ -56,36 +59,31 @@ public class GameBoard implements IGameBoard
      *
      * @return true if the game is over, else it will retun false.
      */
+    private int winner = 0; //save the winner
+
     public boolean isGameOver() {
-        int checkWin = -1;
         for (int i = 0; i < 3; i++) {
-            if (board[i][0] == 1 && board[i][1] == 1 && board[i][2] == 1) {
-                return true;
-            }
-            if (board[i][0] == 2 && board[i][1] == 2 && board[i][2] == 2) {
+            if (board[i][0] != 0 && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+                winner = board[i][0];
                 return true;
             }
         }
         for (int j = 0; j < 3; j++) {
-            if (board[0][j] == 1 && board[1][j] == 1 && board[2][j] == 1) {
+            if (board[0][j] != 0 && board[0][j] == board[1][j] && board[1][j] == board[2][j]) {
+                winner = board[0][j];
                 return true;
             }
-            if (board[0][j] == 2 && board[1][j] == 2 && board[2][j] == 2) {
-                return true;
-            }
         }
-        if (board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1) {
+        if (board[0][0] != 0 && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+            winner = board[0][0];
             return true;
         }
-        if (board[0][0] == 2 && board[1][1] == 2 && board[2][2] == 2) {
+        if (board[0][2] != 0 && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+            winner = board[0][2];
             return true;
         }
-        if (board[0][2] == 1 && board[1][1] == 1 && board[2][0] == 1) {
-            return true;
-        }
-        if (board[0][2] == 2 && board[1][1] == 2 && board[2][0] == 2) {
-            return true;
-        }
+
+        // Draw/no more moves possible
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board[i][j] == 0) {
@@ -93,9 +91,10 @@ public class GameBoard implements IGameBoard
                 }
             }
         }
-        player = -1;
+        winner = -1;
         return true;
     }
+
 
     /**
      * Gets the id of the winner, -1 if its a draw.
@@ -104,7 +103,7 @@ public class GameBoard implements IGameBoard
      */
     public int getWinner()
     {
-        return player;
+        return winner;
     }
 
     /**
@@ -112,6 +111,7 @@ public class GameBoard implements IGameBoard
      */
     public void newGame()
     {
+        winner = 0;
         player = 1;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
