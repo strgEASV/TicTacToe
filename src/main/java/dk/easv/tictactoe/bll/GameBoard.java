@@ -9,7 +9,7 @@ import dk.easv.tictactoe.gui.controller.TicTacViewController;
  */
 public class GameBoard implements IGameBoard
 {
-    public int player = 0;
+    public int player = 1;
     private final int[][] board = new int[3][3];
     /**
      * Returns 0 for player 0, 1 for player 1.
@@ -39,12 +39,15 @@ public class GameBoard implements IGameBoard
      */
     public boolean play(int col, int row)
     {
+        String message = "";
         if (board[row][col] == 0) {
             board[row][col] = player + 1;
             getNextPlayer();
             return true;
         }
-        else return false;
+        else {
+            return false;
+        }
     }
 
     /**
@@ -62,7 +65,6 @@ public class GameBoard implements IGameBoard
             if (board[i][0] == 2 && board[i][1] == 2 && board[i][2] == 2) {
                 return true;
             }
-
         }
         for (int j = 0; j < 3; j++) {
             if (board[0][j] == 1 && board[1][j] == 1 && board[2][j] == 1) {
@@ -72,7 +74,27 @@ public class GameBoard implements IGameBoard
                 return true;
             }
         }
-        return false;
+        if (board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1) {
+            return true;
+        }
+        if (board[0][0] == 2 && board[1][1] == 2 && board[2][2] == 2) {
+            return true;
+        }
+        if (board[0][2] == 1 && board[1][1] == 1 && board[2][0] == 1) {
+            return true;
+        }
+        if (board[0][2] == 2 && board[1][1] == 2 && board[2][0] == 2) {
+            return true;
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+        player = -1;
+        return true;
     }
 
     /**
@@ -82,8 +104,7 @@ public class GameBoard implements IGameBoard
      */
     public int getWinner()
     {
-        //TODO Implement this method
-        return -1;
+        return player;
     }
 
     /**
@@ -91,7 +112,7 @@ public class GameBoard implements IGameBoard
      */
     public void newGame()
     {
-        player = 0;
+        player = 1;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = 0;
