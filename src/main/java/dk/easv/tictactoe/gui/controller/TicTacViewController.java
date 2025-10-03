@@ -1,7 +1,5 @@
-
 package dk.easv.tictactoe.gui.controller;
 
-// Java imports
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,17 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Line;
 
-// Project imports
 import dk.easv.tictactoe.bll.GameBoard;
 import dk.easv.tictactoe.bll.IGameBoard;
 
-/**
- *
- * @author EASV
- */
-public class TicTacViewController implements Initializable
-{
+public class TicTacViewController implements Initializable {
     @FXML
     private Label lblPlayer;
 
@@ -31,97 +25,61 @@ public class TicTacViewController implements Initializable
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private StackPane rootPane; // <- musí být ve FXML jako parent, obsahuje gridPane i čáry
+
     private static final String TXT_PLAYER = "Player: ";
     private IGameBoard game;
+    private Line winLine;
 
-    /**
-     * Event handler for the grid buttons
-     *
-     * @param event
-     */
     @FXML
-    private void handleButtonAction(ActionEvent event)
-    {
-        try
-        {
+    private void handleButtonAction(ActionEvent event) {
+        try {
             Integer row = GridPane.getRowIndex((Node) event.getSource());
             Integer col = GridPane.getColumnIndex((Node) event.getSource());
             int r = (row == null) ? 0 : row;
             int c = (col == null) ? 0 : col;
-            if (game.play(c, r))
-            {
+
+            if (game.play(c, r)) {
                 int player = game.getNextPlayer();
-                if (game.isGameOver())
-                {
-                    Button btn = (Button) event.getSource();
-                    String xOrO = player == 0 ? "X" : "O";
-                    btn.setText(xOrO);
+                Button btn = (Button) event.getSource();
+                String xOrO = player == 0 ? "X" : "O";
+                btn.setText(xOrO);
+
+                if (game.isGameOver()) {
                     int winner = game.getWinner();
                     displayWinner(winner);
-                }
-                else
-                {
-                    Button btn = (Button) event.getSource();
-                    String xOrO = player == 0 ? "X" : "O";
-                    btn.setText(xOrO);
+                    drawWinningLine();
+                } else {
                     setPlayer();
                 }
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    /**
-     * Event handler for starting a new game
-     *
-     * @param event
-     */
     @FXML
-    private void handleNewGame(ActionEvent event)
-    {
+    private void handleNewGame(ActionEvent event) {
         game.newGame();
         setPlayer();
         clearBoard();
+        clearWinningLine();
     }
 
-    /**
-     * Initializes a new controller
-     *
-     * @param url
-     * The location used to resolve relative paths for the root object, or
-     * {@code null} if the location is not known.
-     *
-     * @param rb
-     * The resources used to localize the root object, or {@code null} if
-     * the root object was not localized.
-     */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         game = new GameBoard();
         setPlayer();
     }
 
-    /**
-     * Set the next player
-     */
-    private void setPlayer()
-    {
+    private void setPlayer() {
         lblPlayer.setText(TXT_PLAYER + game.getNextPlayer());
     }
 
-
-    /**
-     * Finds a winner or a draw and displays a message based
-     * @param winner
-     */
-    private void displayWinner(int winner)
-    {
-        String message = "";
-        switch (winner)
-        {
+    private void displayWinner(int winner) {
+        String message;
+        switch (winner) {
             case -1:
                 message = "Bro y'all suck lol XD!";
                 break;
@@ -132,15 +90,49 @@ public class TicTacViewController implements Initializable
         lblPlayer.setText(message);
     }
 
-    /**
-     * Clears the game board in the GUI
-     */
-    private void clearBoard()
-    {
-        for(Node n : gridPane.getChildren())
-        {
-            Button btn = (Button) n;
-            btn.setText("");
+    private void clearBoard() {
+        for (Node n : gridPane.getChildren()) {
+            if (n instanceof Button btn) {
+                btn.setText("");
+            }
         }
+    }
+
+    private void drawWinningLine() {
+        int[][] combo = ((GameBoard) game).getWinningCombination();
+        if (combo == null) return;
+
+        Node startNode = getNodeFromGrid(combo[0][1], combo[0][0]); // col,row
+        Node endNode   = getNodeFromGrid(combo[2][1], combo[2][0]);
+
+        if (startNode == null || endNode == null) return;
+
+        double startX = startNode.getLayoutX() + startNode.getBoundsInParent().getWidth() / 2;
+        double startY = startNode.getLayoutY() + startNode.getBoundsInParent().getHeight() / 2;
+        double endX   = endNode.getLayoutX() + endNode.getBoundsInParent().getWidth() / 2;
+        double endY   = endNode.getLayoutY() + endNode.getBoundsInParent().getHeight() / 2;
+
+        winLine = new Line(startX, startY, endX, endY);
+        winLine.setStyle("-fx-stroke: red; -fx-stroke-width: 4px;");
+
+        rootPane.getChildren().add(winLine);
+    }
+
+    private void clearWinningLine() {
+        if (winLine != null) {
+            rootPane.getChildren().remove(winLine);
+            winLine = null;
+        }
+    }
+
+    private Node getNodeFromGrid(int col, int row) {
+        for (Node n : gridPane.getChildren()) {
+            Integer c = GridPane.getColumnIndex(n);
+            Integer r = GridPane.getRowIndex(n);
+            if ((c == null ? 0 : c) == col && (r == null ? 0 : r) == row) {
+                return n;
+            }
+        }
+        return null;
     }
 }
