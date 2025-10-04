@@ -1,19 +1,27 @@
 package dk.easv.tictactoe.bll;
 
+import javafx.scene.control.Button;
+
 public class GameBoard implements IGameBoard {
     public int player = 1;
     private final int[][] board = new int[3][3];
+    public int typeOfGame = 0; //0 for 2 players, 1 for randomAI, 2 for Bob(smartAI) :)
 
     private int winner = 0; // 0 = žádný, -1 = remíza, 1 nebo 2 = hráči
     private int[][] winningCombination = null; // uloží 3 výherní pole
 
     public int getNextPlayer() {
-        if (player == 1) {
+        if (player == 1 && typeOfGame == 0) {
             player = 0;
-        } else if (player == 0) {
+        }
+        else if (player == 0 && typeOfGame == 0) {
             player = 1;
         }
         return player;
+    }
+
+    public int getTypeOfGame() {
+        return typeOfGame;
     }
 
     public boolean play(int col, int row) {
@@ -89,12 +97,34 @@ public class GameBoard implements IGameBoard {
 
     public void newGame() {
         winner = 0;
+        typeOfGame = 0;
         player = 1;
         winningCombination = null;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = 0;
             }
+        }
+    }
+
+    public void newRandomAIGame() {
+        winner = 0;
+        typeOfGame = 1;
+        player = 0;
+        winningCombination = null;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = 0;
+            }
+        }
+    }
+
+    public void RandomAIMove() {
+        int randomRow= (int)(Math.random() * 3);
+        int randomCol= (int)(Math.random() * 3);
+        while (board[randomRow][randomCol] != 0) {
+            randomRow= (int)(Math.random() * 3);
+            randomCol= (int)(Math.random() * 3);
         }
     }
 }

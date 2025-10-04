@@ -68,12 +68,25 @@
     </top>
 
     <bottom>
-        <Button fx:id="btnNewGame" mnemonicParsing="false" onAction="#handleNewGame" text="New Game" BorderPane.alignment="CENTER_RIGHT">
-            <BorderPane.margin>
-                <Insets top="10.0"/>
-            </BorderPane.margin>
-        </Button>
+        <GridPane hgap="5" alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnNewGame"
+                        text="New Game"
+                        onAction="#handleNewGame"
+                        GridPane.columnIndex="0" />
+
+                <Button fx:id="btnRandomAIGame"
+                        text="Random AI Move"
+                        onAction="#handleRandomAIMove"
+                        GridPane.columnIndex="1" />
+            </children>
+            <padding>
+                <!-- this adds space around the *whole* GridPane -->
+                <Insets top="15.0" bottom="5.0"/>
+            </padding>
+        </GridPane>
     </bottom>
+
 
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

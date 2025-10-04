@@ -23,6 +23,9 @@ public class TicTacViewController implements Initializable {
     private Button btnNewGame;
 
     @FXML
+    private Button btnRandomAIGame;
+
+    @FXML
     private GridPane gridPane;
 
     @FXML
@@ -45,14 +48,40 @@ public class TicTacViewController implements Initializable {
                 Button btn = (Button) event.getSource();
                 String xOrO = player == 0 ? "X" : "O";
                 btn.setText(xOrO);
+                int typeOfGame = game.getTypeOfGame();
+                if (game.getTypeOfGame() == 1) { // Random AI game
+                    if (!game.isGameOver()) {
+                        boolean moved = false;
+                        int attempts = 0;
+                        while (!moved && attempts < 9) { //ensure it doesnt try playing if its over (can cause crash)
+                            int randomRow = (int) (Math.random() * 3);
+                            int randomCol = (int) (Math.random() * 3);
+                            moved = game.play(randomCol, randomRow);
+                            attempts++;
+                            if (moved) {
+                                player = game.getNextPlayer();
+                                Button btn2 = (Button) getNodeFromGrid(randomCol, randomRow);
+                                String xOrO2 = game.getNextPlayer() == 1 ? "X" : "O";
+                                btn2.setText(xOrO2);
+                                player = game.getNextPlayer();
+                            }
+                        }
+                    }
+                }
+
 
                 if (game.isGameOver()) {
                     int winner = game.getWinner();
-                    displayWinner(winner);
-                    drawWinningLine();
+                    if (winner != -1) { // <- make sure there is a real winner
+                        displayWinner(winner);
+                        drawWinningLine();
+                    } else {
+                        lblPlayer.setText("It's a tie!");
+                    }
                 } else {
                     setPlayer();
                 }
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -66,6 +95,16 @@ public class TicTacViewController implements Initializable {
         clearBoard();
         clearWinningLine();
     }
+
+    @FXML
+    private void handleRandomAIMove(ActionEvent event) {
+        game.newRandomAIGame();
+        setPlayer();
+        clearBoard();
+        clearWinningLine();
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,11 +139,10 @@ public class TicTacViewController implements Initializable {
 
     private void drawWinningLine() {
         int[][] combo = ((GameBoard) game).getWinningCombination();
-        if (combo == null) return;
+        if (combo == null || combo.length != 3) return; // check for valid combo
 
-        Node startNode = getNodeFromGrid(combo[0][1], combo[0][0]); // col,row
+        Node startNode = getNodeFromGrid(combo[0][1], combo[0][0]);
         Node endNode   = getNodeFromGrid(combo[2][1], combo[2][0]);
-
         if (startNode == null || endNode == null) return;
 
         double startX = startNode.getLayoutX() + startNode.getBoundsInParent().getWidth() / 2;
@@ -114,9 +152,9 @@ public class TicTacViewController implements Initializable {
 
         winLine = new Line(startX, startY, endX, endY);
         winLine.setStyle("-fx-stroke: red; -fx-stroke-width: 4px;");
-
         rootPane.getChildren().add(winLine);
     }
+
 
     private void clearWinningLine() {
         if (winLine != null) {

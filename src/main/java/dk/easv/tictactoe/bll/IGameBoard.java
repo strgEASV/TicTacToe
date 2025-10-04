@@ -46,4 +46,10 @@ public interface IGameBoard
      * Resets the game to a new game state.
      */
     void newGame();
+
+    void RandomAIMove();
+
+    void newRandomAIGame();
+
+    int getTypeOfGame();
 }
