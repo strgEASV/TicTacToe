@@ -76,9 +76,14 @@
                         GridPane.columnIndex="0" />
 
                 <Button fx:id="btnRandomAIGame"
-                        text="Random AI Move"
+                        text="Random AI"
                         onAction="#handleRandomAIMove"
                         GridPane.columnIndex="1" />
+
+                <Button fx:id="btnSmartAIGame"
+                        text="Smart AI"
+                        onAction="#handleSmartAIGame"
+                        GridPane.columnIndex="2" />
             </children>
             <padding>
                 <!-- this adds space around the *whole* GridPane -->

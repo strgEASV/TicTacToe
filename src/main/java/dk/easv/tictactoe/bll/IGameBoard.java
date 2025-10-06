@@ -49,7 +49,11 @@ public interface IGameBoard
 
     void newRandomAIGame();
 
+    void newSmartAIGame();
+
     int getTypeOfGame();
 
     void AIPlay(int col, int row);
+
+    int[] getBestMove();
 }

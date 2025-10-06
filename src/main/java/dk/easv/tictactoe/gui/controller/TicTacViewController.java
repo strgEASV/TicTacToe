@@ -26,6 +26,9 @@ public class TicTacViewController implements Initializable {
     private Button btnRandomAIGame;
 
     @FXML
+    private Button btnSmartAIGame;
+
+    @FXML
     private GridPane gridPane;
 
     @FXML
@@ -52,11 +55,13 @@ public class TicTacViewController implements Initializable {
                 String xOrO = player == 0 ? "X" : "O";
                 btn.setText(xOrO);
                 int typeOfGame = game.getTypeOfGame();
-                if (game.getTypeOfGame() == 1) { // Random AI game
+                
+                // Random AI
+                if (typeOfGame == 1) {
                     if (!game.isGameOver()) {
                         boolean moved = false;
                         int attempts = 0;
-                        while (!moved && attempts < 50) { //ensure it doesnt try playing if its over (can cause crash)
+                        while (!moved && attempts < 50) {
                             int randomRow = (int) (Math.random() * 3);
                             int randomCol = (int) (Math.random() * 3);
                             moved = game.play(randomCol, randomRow);
@@ -67,6 +72,23 @@ public class TicTacViewController implements Initializable {
                                 xOrO = "O";
                                 btn.setText(xOrO);
                             }
+                        }
+                    }
+                }
+                
+                // Smart AI
+                if (typeOfGame == 2) {
+                    if (!game.isGameOver()) {
+                        int[] bestMove = game.getBestMove();
+                        int aiRow = bestMove[0];
+                        int aiCol = bestMove[1];
+                        
+                        boolean moved = game.play(aiCol, aiRow);
+                        if (moved) {
+                            game.AIPlay(aiCol, aiRow);
+                            btn = (Button) getNodeFromGrid(aiCol, aiRow);
+                            xOrO = "O";
+                            btn.setText(xOrO);
                         }
                     }
                 }
@@ -101,6 +123,14 @@ public class TicTacViewController implements Initializable {
     @FXML
     private void handleRandomAIMove(ActionEvent event) {
         game.newRandomAIGame();
+        setPlayer();
+        clearBoard();
+        clearWinningLine();
+    }
+
+    @FXML
+    private void handleSmartAIGame(ActionEvent event) {
+        game.newSmartAIGame();
         setPlayer();
         clearBoard();
         clearWinningLine();
