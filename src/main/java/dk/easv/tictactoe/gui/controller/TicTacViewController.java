@@ -31,6 +31,9 @@ public class TicTacViewController implements Initializable {
     @FXML
     private StackPane rootPane; // <- musí být ve FXML jako parent, obsahuje gridPane i čáry
 
+    @FXML
+    private javafx.scene.layout.Pane linePane; // <- Pane pro kreslení linek
+
     private static final String TXT_PLAYER = "Player: ";
     private IGameBoard game;
     private Line winLine;
@@ -144,20 +147,24 @@ public class TicTacViewController implements Initializable {
         Node endNode   = getNodeFromGrid(combo[2][1], combo[2][0]);
         if (startNode == null || endNode == null) return;
 
-        double startX = startNode.getLayoutX() + startNode.getBoundsInParent().getWidth() / 2;
-        double startY = startNode.getLayoutY() + startNode.getBoundsInParent().getHeight() / 2;
-        double endX   = endNode.getLayoutX() + endNode.getBoundsInParent().getWidth() / 2;
-        double endY   = endNode.getLayoutY() + endNode.getBoundsInParent().getHeight() / 2;
+        // Použijeme localToParent() pro správné souřadnice v rámci StackPane
+        javafx.geometry.Bounds startBounds = startNode.getBoundsInParent();
+        javafx.geometry.Bounds endBounds = endNode.getBoundsInParent();
+
+        double startX = startBounds.getMinX() + startBounds.getWidth() / 2;
+        double startY = startBounds.getMinY() + startBounds.getHeight() / 2;
+        double endX = endBounds.getMinX() + endBounds.getWidth() / 2;
+        double endY = endBounds.getMinY() + endBounds.getHeight() / 2;
 
         winLine = new Line(startX, startY, endX, endY);
-        winLine.setStyle("-fx-stroke: red; -fx-stroke-width: 4px;");
-        rootPane.getChildren().add(winLine);
+        winLine.setStyle("-fx-stroke: red; -fx-stroke-width: 5px;");
+        linePane.getChildren().add(winLine);
     }
 
 
     private void clearWinningLine() {
         if (winLine != null) {
-            rootPane.getChildren().remove(winLine);
+            linePane.getChildren().remove(winLine);
             winLine = null;
         }
     }
