@@ -38,6 +38,10 @@ public class GameBoard implements IGameBoard {
         }
     }
 
+    public void AIPlay(int col, int row) {
+        board[row][col] = 3;
+    }
+
     public boolean isGameOver() {
         // reset winningCombination při každé kontrole
         winningCombination = null;
@@ -116,15 +120,6 @@ public class GameBoard implements IGameBoard {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = 0;
             }
-        }
-    }
-
-    public void RandomAIMove() {
-        int randomRow= (int)(Math.random() * 3);
-        int randomCol= (int)(Math.random() * 3);
-        while (board[randomRow][randomCol] != 0) {
-            randomRow= (int)(Math.random() * 3);
-            randomCol= (int)(Math.random() * 3);
         }
     }
 }

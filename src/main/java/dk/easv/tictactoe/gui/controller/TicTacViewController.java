@@ -53,17 +53,16 @@ public class TicTacViewController implements Initializable {
                     if (!game.isGameOver()) {
                         boolean moved = false;
                         int attempts = 0;
-                        while (!moved && attempts < 9) { //ensure it doesnt try playing if its over (can cause crash)
+                        while (!moved && attempts < 50) { //ensure it doesnt try playing if its over (can cause crash)
                             int randomRow = (int) (Math.random() * 3);
                             int randomCol = (int) (Math.random() * 3);
                             moved = game.play(randomCol, randomRow);
                             attempts++;
                             if (moved) {
-                                player = game.getNextPlayer();
-                                Button btn2 = (Button) getNodeFromGrid(randomCol, randomRow);
-                                String xOrO2 = game.getNextPlayer() == 1 ? "X" : "O";
-                                btn2.setText(xOrO2);
-                                player = game.getNextPlayer();
+                                game.AIPlay(randomCol, randomRow);
+                                btn = (Button) getNodeFromGrid(randomCol, randomRow);
+                                xOrO = "O";
+                                btn.setText(xOrO);
                             }
                         }
                     }
@@ -76,7 +75,7 @@ public class TicTacViewController implements Initializable {
                         displayWinner(winner);
                         drawWinningLine();
                     } else {
-                        lblPlayer.setText("It's a tie!");
+                        lblPlayer.setText("U suck lol!");
                     }
                 } else {
                     setPlayer();

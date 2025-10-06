@@ -47,9 +47,9 @@ public interface IGameBoard
      */
     void newGame();
 
-    void RandomAIMove();
-
     void newRandomAIGame();
 
     int getTypeOfGame();
+
+    void AIPlay(int col, int row);
 }
