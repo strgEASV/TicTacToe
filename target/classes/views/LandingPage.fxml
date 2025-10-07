@@ -8,24 +8,44 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root"
-           xmlns="http://javafx.com/javafx/24.0.1"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="dk.easv.tictactoe.gui.controller.LandingPageController"
-           prefHeight="900.0" prefWidth="800.0"
-           style="-fx-background-color: linear-gradient(to bottom, #0a0015, #1a0530, #0f001f);">
+<StackPane fx:id="root" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom, #0a0015, #1a0530, #0f001f);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.tictactoe.gui.controller.LandingPageController">
 
     <!-- Obsah -->
     <VBox alignment="CENTER" spacing="50.0">
         <padding>
             <Insets bottom="80.0" left="80.0" right="80.0" top="80.0" />
         </padding>
+      <Label style="-fx-text-fill: #eeff00; -fx-font-size: 72px; -fx-font-weight: bold;" text="Diddi´s Party!">
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.25999999046325684" green="0.25904974341392517" blue="0.1664000004529953" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
 
         <!-- Název hry s neonovým efektem -->
-        <Label text="TIC TAC TOE" 
-               style="-fx-text-fill: #00ffff; -fx-font-size: 72px; -fx-font-weight: bold;">
+        <Label style="-fx-text-fill: #00ffff; -fx-font-size: 72px; -fx-font-weight: bold;" text="Tic Tac Toe">
             <font>
                 <Font name="System Bold" size="72.0" />
             </font>
@@ -37,22 +57,7 @@
         <!-- Tlačítka s neonovým stylem -->
         <VBox alignment="CENTER" spacing="30.0">
 
-            <Button fx:id="btnMultiplayer"
-                    text="MULTIPLAYER"
-                    onAction="#handleMultiplayer"
-                    prefWidth="350.0"
-                    prefHeight="70.0"
-                    style="-fx-background-color: transparent; 
-                           -fx-border-color: #00ff88; 
-                           -fx-border-width: 3px;
-                           -fx-border-radius: 15; 
-                           -fx-background-radius: 15;
-                           -fx-text-fill: #00ff88;
-                           -fx-font-size: 24px; 
-                           -fx-font-weight: bold;
-                           -fx-cursor: hand;"
-                    onMouseEntered="#handleButtonHover"
-                    onMouseExited="#handleButtonExit">
+            <Button fx:id="btnMultiplayer" onAction="#handleMultiplayer" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: transparent;                             -fx-border-color: #00ff88;                             -fx-border-width: 3px;                            -fx-border-radius: 15;                             -fx-background-radius: 15;                            -fx-text-fill: #00ff88;                            -fx-font-size: 24px;                             -fx-font-weight: bold;                            -fx-cursor: hand;" text="MULTIPLAYER">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>
@@ -65,22 +70,7 @@
                 </effect>
             </Button>
 
-            <Button fx:id="btnRandomAI"
-                    text="RANDOM AI"
-                    onAction="#handleRandomAI"
-                    prefWidth="350.0"
-                    prefHeight="70.0"
-                    style="-fx-background-color: transparent; 
-                           -fx-border-color: #00d4ff; 
-                           -fx-border-width: 3px;
-                           -fx-border-radius: 15; 
-                           -fx-background-radius: 15;
-                           -fx-text-fill: #00d4ff;
-                           -fx-font-size: 24px; 
-                           -fx-font-weight: bold;
-                           -fx-cursor: hand;"
-                    onMouseEntered="#handleButtonHover"
-                    onMouseExited="#handleButtonExit">
+            <Button fx:id="btnRandomAI" onAction="#handleRandomAI" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: transparent;                             -fx-border-color: #00d4ff;                             -fx-border-width: 3px;                            -fx-border-radius: 15;                             -fx-background-radius: 15;                            -fx-text-fill: #00d4ff;                            -fx-font-size: 24px;                             -fx-font-weight: bold;                            -fx-cursor: hand;" text="RANDOM AI">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>
@@ -93,22 +83,7 @@
                 </effect>
             </Button>
 
-            <Button fx:id="btnSmartAI"
-                    text="SMART AI"
-                    onAction="#handleSmartAI"
-                    prefWidth="350.0"
-                    prefHeight="70.0"
-                    style="-fx-background-color: transparent; 
-                           -fx-border-color: #ff00aa; 
-                           -fx-border-width: 3px;
-                           -fx-border-radius: 15; 
-                           -fx-background-radius: 15;
-                           -fx-text-fill: #ff00aa;
-                           -fx-font-size: 24px; 
-                           -fx-font-weight: bold;
-                           -fx-cursor: hand;"
-                    onMouseEntered="#handleButtonHover"
-                    onMouseExited="#handleButtonExit">
+            <Button fx:id="btnSmartAI" onAction="#handleSmartAI" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="70.0" prefWidth="350.0" style="-fx-background-color: transparent;                             -fx-border-color: #ff00aa;                             -fx-border-width: 3px;                            -fx-border-radius: 15;                             -fx-background-radius: 15;                            -fx-text-fill: #ff00aa;                            -fx-font-size: 24px;                             -fx-font-weight: bold;                            -fx-cursor: hand;" text="SMART AI">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>

@@ -194,7 +194,7 @@ public class TicTacViewController implements Initializable {
                 message = "Bro y'all suck lol XD!";
                 break;
             default:
-                message = "Yo yo yo, " + winner + " won!!! Nerd...";
+                message = "Yo yo yo, " + winner + " Won!!! Nerd...";
                 break;
         }
         lblPlayer.setText(message);
@@ -226,7 +226,7 @@ public class TicTacViewController implements Initializable {
         double endY = endBounds.getMinY() + endBounds.getHeight() / 2;
 
         winLine = new Line(startX, startY, endX, endY);
-        winLine.setStyle("-fx-stroke: red; -fx-stroke-width: 5px;");
+        winLine.setStyle("-fx-stroke: #c8ff00; -fx-stroke-width: 5px; -fx-stroke-line-cap: round;");
         linePane.getChildren().add(winLine);
     }
 
