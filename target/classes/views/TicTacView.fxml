@@ -78,18 +78,12 @@
             <children>
                 <Button fx:id="btnNewGame" onAction="#handleNewGame" text="New Game" GridPane.columnIndex="0" />
 
-                <Button fx:id="btnRandomAIGame" onAction="#handleRandomAIMove" text="Random AI" GridPane.columnIndex="1" />
-
-                <Button fx:id="btnSmartAIGame" onAction="#handleSmartAIGame" text="Smart AI" GridPane.columnIndex="2" />
-
-                <Button fx:id="btnBackToMenu" onAction="#handleBackToMenu" text="Back to Menu" GridPane.columnIndex="3" />
+                <Button fx:id="btnBackToMenu" onAction="#handleBackToMenu" text="Back to Menu" GridPane.columnIndex="1" />
             </children>
             <padding>
                 <Insets bottom="20.0" left="25.0" right="25.0" top="25.0" />
             </padding>
          <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
          </columnConstraints>
