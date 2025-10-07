@@ -13,49 +13,63 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../css/Main.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.tictactoe.gui.controller.TicTacViewController">
+<BorderPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="900.0" prefWidth="800.0" stylesheets="@../css/Main.css"
+            xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dk.easv.tictactoe.gui.controller.TicTacViewController">
 
-    <!-- Pozadí s obrázkem -->
     <center>
-        <StackPane>
+        <StackPane alignment="CENTER">
             <!-- Obrázek na pozadí -->
-            <ImageView fitHeight="700.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="false">
+            <ImageView fitHeight="900.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="false">
                 <image>
                     <Image url="@/images/game-bg.jpg" />
                 </image>
             </ImageView>
 
-            <!-- Tmavý overlay pro lepší kontrast -->
-            <StackPane style="-fx-background-color: rgba(10, 0, 30, 0.7);" />
+            <!-- Tmavý overlay -->
+            <StackPane style="-fx-background-color: rgba(10, 0, 30, 0.75);" />
 
-            <!-- Vrstvení tlačítek a linek -->
-            <StackPane fx:id="rootPane">
+            <!-- Herní obsah -->
+            <StackPane fx:id="rootPane" alignment="CENTER">
                 <!-- Herní mřížka -->
-                <GridPane fx:id="gridPane" alignment="CENTER" hgap="8.0" vgap="8.0">
+                <GridPane fx:id="gridPane" alignment="CENTER" hgap="15.0" vgap="15.0">
+                    <padding>
+                        <Insets top="0.0" bottom="0.0" left="0.0" right="0.0"/>
+                    </padding>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" prefWidth="180.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" prefWidth="180.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" prefWidth="180.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="180.0" prefHeight="180.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="180.0" prefHeight="180.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="180.0" prefHeight="180.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" />
-                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
-                        <Button fx:id="btn3" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
-                        <Button fx:id="btn4" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
-                        <Button fx:id="btn5" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="btn6" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Button fx:id="btn7" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
-                        <Button fx:id="btn8" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Button fx:id="btn9" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" />
+                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="1" />
+                        <Button fx:id="btn3" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="2" />
+                        <Button fx:id="btn4" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.rowIndex="1" />
+                        <Button fx:id="btn5" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="btn6" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="btn7" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.rowIndex="2" />
+                        <Button fx:id="btn8" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="btn9" mnemonicParsing="false" onAction="#handleButtonAction"
+                                prefHeight="180.0" prefWidth="180.0" maxHeight="180.0" maxWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
 
-                <Pane fx:id="linePane" pickOnBounds="false" />
+                <Pane fx:id="linePane" pickOnBounds="false" mouseTransparent="true" />
             </StackPane>
         </StackPane>
     </center>
@@ -65,35 +79,34 @@
             <padding>
                 <Insets bottom="20.0" top="20.0" />
             </padding>
-            <Label fx:id="lblPlayer" text="Player 1">
+            <Label fx:id="lblPlayer" text="Player 1" style="-fx-text-fill: white;">
                 <font>
-                    <Font size="42.0" />
+                    <Font name="System Bold" size="32.0" />
                 </font>
             </Label>
         </StackPane>
     </top>
 
     <bottom>
-        <GridPane alignment="CENTER" hgap="15" style="-fx-background-color: rgba(10, 0, 30, 0.8);" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="btnNewGame" onAction="#handleNewGame" text="New Game" GridPane.columnIndex="0" />
-
-                <Button fx:id="btnBackToMenu" onAction="#handleBackToMenu" text="Back to Menu" GridPane.columnIndex="1" />
-            </children>
-            <padding>
-                <Insets bottom="20.0" left="25.0" right="25.0" top="25.0" />
-            </padding>
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
+        <StackPane alignment="CENTER" style="-fx-background-color: rgba(10, 0, 30, 0.85);" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" hgap="20.0">
+                <padding>
+                    <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                </padding>
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" />
+                    <ColumnConstraints halignment="CENTER" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER" />
+                </rowConstraints>
+                <children>
+                    <Button fx:id="btnNewGame" onAction="#handleNewGame" text="New Game"
+                            prefWidth="140.0" prefHeight="40.0" GridPane.columnIndex="0" />
+                    <Button fx:id="btnBackToMenu" onAction="#handleBackToMenu" text="Back to Menu"
+                            prefWidth="140.0" prefHeight="40.0" GridPane.columnIndex="1" />
+                </children>
+            </GridPane>
+        </StackPane>
     </bottom>
-
-    <padding>
-        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
-    </padding>
 </BorderPane>

@@ -35,10 +35,10 @@ public class TicTacViewController implements Initializable {
     private GridPane gridPane;
 
     @FXML
-    private StackPane rootPane; // <- musí být ve FXML jako parent, obsahuje gridPane i čáry
+    private StackPane rootPane;
 
     @FXML
-    private javafx.scene.layout.Pane linePane; // <- Pane pro kreslení linek
+    private javafx.scene.layout.Pane linePane;
 
     private static final String TXT_PLAYER = "Player: ";
     private IGameBoard game;
@@ -55,7 +55,7 @@ public class TicTacViewController implements Initializable {
             if (game.play(c, r)) {
                 int player = game.getNextPlayer();
                 Button btn = (Button) event.getSource();
-                String xOrO = player == 0 ? "X" : "O";
+                String xOrO = player == 0 ? "X" : "0";
                 btn.setText(xOrO);
                 int typeOfGame = game.getTypeOfGame();
                 
@@ -72,7 +72,7 @@ public class TicTacViewController implements Initializable {
                             if (moved) {
                                 game.AIPlay(randomCol, randomRow);
                                 btn = (Button) getNodeFromGrid(randomCol, randomRow);
-                                xOrO = "O";
+                                xOrO = "0";
                                 btn.setText(xOrO);
                             }
                         }
@@ -90,7 +90,7 @@ public class TicTacViewController implements Initializable {
                         if (moved) {
                             game.AIPlay(aiCol, aiRow);
                             btn = (Button) getNodeFromGrid(aiCol, aiRow);
-                            xOrO = "O";
+                            xOrO = "0";
                             btn.setText(xOrO);
                         }
                     }

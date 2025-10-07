@@ -20,8 +20,7 @@ public class LandingPageController {
     @FXML
     private StackPane root;
 
-    @FXML
-    private ImageView backgroundImage;
+
 
     @FXML
     private Button btnMultiplayer;
@@ -36,14 +35,7 @@ public class LandingPageController {
 
     @FXML
     private void initialize() {
-        // Načti obrázek a nastav ho jako pozadí
-        Image image = new Image(getClass().getResourceAsStream("/images/bg.png"));
-        backgroundImage.setImage(image);
-
-        // Zajistí, že obrázek přesně pokryje 400x500 px
-        backgroundImage.setFitHeight(500);
-        backgroundImage.setFitWidth(300);
-        backgroundImage.setPreserveRatio(false);
+        // Inicializace už není potřeba - pozadí je nastaveno v FXML
     }
 
     @FXML
@@ -98,28 +90,74 @@ public class LandingPageController {
     @FXML
     private void handleButtonHover(MouseEvent event) {
         Button button = (Button) event.getSource();
-        String currentStyle = button.getStyle();
-
+        
         if (button == btnMultiplayer) {
-            button.setStyle(currentStyle + " -fx-background-color: #27ae60;");
+            button.setStyle("-fx-background-color: rgba(0, 255, 136, 0.2); " +
+                          "-fx-border-color: #00ff88; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #00ff88; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         } else if (button == btnRandomAI) {
-            button.setStyle(currentStyle + " -fx-background-color: #2980b9;");
+            button.setStyle("-fx-background-color: rgba(0, 212, 255, 0.2); " +
+                          "-fx-border-color: #00d4ff; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #00d4ff; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         } else if (button == btnSmartAI) {
-            button.setStyle(currentStyle + " -fx-background-color: #c0392b;");
+            button.setStyle("-fx-background-color: rgba(255, 0, 170, 0.2); " +
+                          "-fx-border-color: #ff00aa; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #ff00aa; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         }
     }
 
     @FXML
     private void handleButtonExit(MouseEvent event) {
         Button button = (Button) event.getSource();
-        String currentStyle = button.getStyle();
-
+        
         if (button == btnMultiplayer) {
-            button.setStyle(currentStyle.replace("-fx-background-color: #27ae60;", "-fx-background-color: #2ecc71;"));
+            button.setStyle("-fx-background-color: transparent; " +
+                          "-fx-border-color: #00ff88; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #00ff88; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         } else if (button == btnRandomAI) {
-            button.setStyle(currentStyle.replace("-fx-background-color: #2980b9;", "-fx-background-color: #3498db;"));
+            button.setStyle("-fx-background-color: transparent; " +
+                          "-fx-border-color: #00d4ff; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #00d4ff; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         } else if (button == btnSmartAI) {
-            button.setStyle(currentStyle.replace("-fx-background-color: #c0392b;", "-fx-background-color: #e74c3c;"));
+            button.setStyle("-fx-background-color: transparent; " +
+                          "-fx-border-color: #ff00aa; " +
+                          "-fx-border-width: 3px; " +
+                          "-fx-border-radius: 15; " +
+                          "-fx-background-radius: 15; " +
+                          "-fx-text-fill: #ff00aa; " +
+                          "-fx-font-size: 24px; " +
+                          "-fx-font-weight: bold; " +
+                          "-fx-cursor: hand;");
         }
     }
 }
