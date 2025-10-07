@@ -25,11 +25,11 @@ public class TicTacToe extends Application
     public void start(Stage stage) throws Exception
     {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/views/TicTacView.fxml"));
+        loader.setLocation(getClass().getResource("/views/LandingPage.fxml"));
         Parent scene = loader.load();
         stage.setScene(new Scene(scene));
         stage.setResizable(false);
-        stage.setTitle("Tic Tac Toe");
+        stage.setTitle("Tic Tac Toe - Select Mode");
         stage.centerOnScreen();
 
         stage.show();

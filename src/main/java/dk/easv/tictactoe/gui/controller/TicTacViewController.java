@@ -27,6 +27,9 @@ public class TicTacViewController implements Initializable {
 
     @FXML
     private Button btnSmartAIGame;
+    
+    @FXML
+    private Button btnBackToMenu;
 
     @FXML
     private GridPane gridPane;
@@ -135,6 +138,24 @@ public class TicTacViewController implements Initializable {
         clearBoard();
         clearWinningLine();
     }
+    
+    @FXML
+    private void handleBackToMenu(ActionEvent event) {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader();
+            loader.setLocation(getClass().getResource("/views/LandingPage.fxml"));
+            javafx.scene.Parent landingPage = loader.load();
+            
+            javafx.scene.Scene scene = new javafx.scene.Scene(landingPage);
+            javafx.stage.Stage stage = (javafx.stage.Stage) btnBackToMenu.getScene().getWindow();
+            
+            stage.setScene(scene);
+            stage.setTitle("Tic Tac Toe - Select Mode");
+            stage.centerOnScreen();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -142,6 +163,24 @@ public class TicTacViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         game = new GameBoard();
         setPlayer();
+    }
+    
+    // Method to initialize game mode from landing page
+    public void initializeGameMode(int gameMode) {
+        switch (gameMode) {
+            case 0:
+                game.newGame();
+                break;
+            case 1:
+                game.newRandomAIGame();
+                break;
+            case 2:
+                game.newSmartAIGame();
+                break;
+        }
+        setPlayer();
+        clearBoard();
+        clearWinningLine();
     }
 
     private void setPlayer() {
