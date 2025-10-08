@@ -81,7 +81,10 @@
                         <Button fx:id="btn9" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <padding>
                         <Insets left="25.0" />
-                     </padding></Button>
+                     </padding>
+                     <GridPane.margin>
+                        <Insets left="25.0" />
+                     </GridPane.margin></Button>
                     </children>
                 </GridPane>
 
